@@ -302,7 +302,13 @@ Restart service dengan perintah `service squid restart`.
 
 Aktifkan proxy di Client dengan perintah `export http_proxy="http://jualbelikapal.d09.com:5000"`.  
 
-Testing dengan perintah `lynx https://its.ac.id`.  
+Testing dengan perintah `lynx https://its.ac.id`. 
+
+![image](https://user-images.githubusercontent.com/65032157/141647610-378e98eb-0b9c-48df-b322-5c259e6c7655.png)
+
+![image](https://user-images.githubusercontent.com/65032157/141647623-1ffa7b3a-e6d0-4869-a866-724913fc43c0.png)
+
+
 
 ## No 9
 Agar transaksi jual beli lebih aman dan pengguna website ada dua orang, proxy dipasang autentikasi user proxy dengan enkripsi MD5  dengan dua username, yaitu luffybelikapalyyy dengan password luffy_yyy dan zorobelikapalyyy dengan password zoro_yyy  
