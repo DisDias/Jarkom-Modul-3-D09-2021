@@ -100,7 +100,7 @@ Nur Moh. Ihsanuddien | 05111940000142
 ## No 1
 Luffy bersama Zoro berencana membuat peta tersebut dengan kriteria EniesLobby sebagai DNS Server, Jipangu sebagai DHCP Server, Water7 sebagai Proxy Server
 
-Pertama, pada router `Foosha` jalankan perintah `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.196.0.0/16` agar dapat terhubung dengan jaringan luar. Kemudian, pada EniesLobby, Water7, dan Jipanggu jalankan perintah `echo "nameserver 192.196..." > /etc/resolv.conf` yang berguna untuk setting IP DNS agar terhubung dengan jaringan luar.
+Pertama, pada router `Foosha` jalankan perintah `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.196.0.0/16` agar dapat terhubung dengan jaringan luar. Kemudian, pada EniesLobby, Water7, dan Jipanggu jalankan perintah `echo "nameserver 192.168.122.1" > /etc/resolv.conf` yang berguna untuk setting IP DNS agar terhubung dengan jaringan luar.
 
 Setelah itu, melakukan instalasi:
 - EnniesLobby
@@ -141,6 +141,22 @@ Setelah itu, edit file `/etc/default/isc-dhcp-relay` dengan menambahkan IP `Jipa
 
 
 ## No 3
+Konfigurasikan semua client agar menggunakan IP dari DHCP Server.  
+
+Gunakan perintah `nano /etc/network/interfaces` pada setiap client node.    
+
+Ubah konfigurasi yang ada menjadi seperti di bawah. Contoh di bawah diterapkan pada Client Node Loguetown.  
+```
+    #auto eth0
+	#iface eth0 inet static
+	#	address 192.196.1.2
+	#	netmask 255.255.255.0
+	#	gateway 192.196.1.1
+	auto eth0
+	iface eth0 inet dhcp
+```  
+Comment konfigurasi static di semua client node dan uncomment konfigurasi DHCP-nya.  
+
 Client yang melalui Switch1 mendapatkan range IP dari [prefix IP].1.20 - [prefix IP].1.99 dan [prefix IP].1.150 - [prefix IP].1.169
 
 Pada `Jipangu` tambahkan isi file `/etc/dhcp/dhcpd.conf` dengan perintah:
