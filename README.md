@@ -345,6 +345,12 @@ Restart squid dengan perintah `service squid restart`.
 
 Lakukan testing.  
 
+Akses pada saat diluar jam terjadwal 
+![image](https://user-images.githubusercontent.com/65032157/141648332-bdd99af6-8de2-4630-90be-09c878e3b3b1.png)
+
+![image](https://user-images.githubusercontent.com/65032157/141648305-17ef4c1b-dc02-453e-a023-5551c5e924de.png)
+
+
 
 ## No 11
 Web server super.franky.yyy.com berada pada node Skypie
