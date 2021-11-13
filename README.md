@@ -303,10 +303,11 @@ Restart service dengan perintah `service squid restart`.
 Aktifkan proxy di Client dengan perintah `export http_proxy="http://jualbelikapal.d09.com:5000"`.  
 
 Testing dengan perintah `lynx https://its.ac.id`. 
+![image](https://user-images.githubusercontent.com/65032157/141647814-42c7251f-8db7-449a-9e73-d5dd434e0e50.png)
+(https://user-images.githubusercontent.com/68385532/141646505-6108f646-2961-4553-b743-fb6c6d23b3ac.PNG)
 
-![image](https://user-images.githubusercontent.com/65032157/141647610-378e98eb-0b9c-48df-b322-5c259e6c7655.png)
 
-![image](https://user-images.githubusercontent.com/65032157/141647623-1ffa7b3a-e6d0-4869-a866-724913fc43c0.png)
+
 
 
 
