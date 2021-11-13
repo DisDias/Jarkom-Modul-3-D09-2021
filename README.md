@@ -251,6 +251,47 @@ Transaksi jual beli tidak dilakukan setiap hari, oleh karena itu akses internet 
 ## No 11
 Web server super.franky.yyy.com berada pada node Skypie
 
+1. Membuka `EniesLobby` ,kemudian melakukan konfigurasi seperti berikut
+![11_1](https://user-images.githubusercontent.com/65032157/141611564-aa388f99-0a8f-4971-8d01-5cfc3176306c.png)
+
+Kemudian membuat dan konfigurasi pada `/etc/bind/kaizoku/super.franky.d09.com`
+
+![11_2](https://user-images.githubusercontent.com/65032157/141611618-621c017d-cca0-4539-a394-bf748f3b5f78.png)
+
+Melakukan `service bind9 restart`
+
+2. Membuka `Skypie` dan menginstall seperti berikut
+
+![11_3](https://user-images.githubusercontent.com/65032157/141611633-8933ac7d-5eeb-43f7-943b-6424ee76dab0.png)
+
+Membuat `mkdir /var/www/super.franky.d09.com`
+Mendonwload dan Unzip `super.franky` dan meindahkan ke `/var/www/super.franky.d09.com`
+Melakukan copy `cp /etc/bind/db.local /etc/bind/kaizoku/super.franky.d09.com.conf` dan mengisi dengan konfigurasi berikut
+
+![image](https://user-images.githubusercontent.com/65032157/141611789-40ec9ac8-f4a2-423e-8570-53b251bf064f.png)
+
+Melakukan `a2ensite super.franky.d09.com` kemudian `service apache2 restart`
+
+3. Membuka Water7 dan pada file `/etc/squid/squid.conf` menambahkan konfigurasi:
+![11_6](https://user-images.githubusercontent.com/65032157/141612063-a1050349-2df4-4f8d-826d-83fd737cac86.png)
+
+menjadi 
+![image](https://user-images.githubusercontent.com/65032157/141611992-a7fb13aa-a300-427b-be61-1b41678ad614.png)
+
+Kemudian melakukan `Service squid restart` 
+
+### Testing
+
+Melakukan `lynx google.com` pada Client `LogueTown`
+
+Dan setelah melakukan login akan membuka halaman super.franky.d09.com
+![11_9](https://user-images.githubusercontent.com/65032157/141612147-5fdef6bb-8563-45f0-a259-2cb8272b59d8.png)
+
+
+
+
+
+
 ## No 12
 Karena Luffy orangnya sangat teliti untuk mencari harta karun, ketika ia berhasil mendapatkan gambar, ia mendapatkan gambar dan melihatnya dengan kecepatan 10 kbps
 
