@@ -234,8 +234,6 @@ dan untuk Switch3 atau `subnet 192.196.3.0` tambahkan :
     max-lease-time 7200;
 ```
 
-<img src="img/M03-6.png">
-
 
 ## No 7
 Luffy dan Zoro berencana menjadikan Skypie sebagai server untuk jual beli kapal yang dimilikinya dengan alamat IP yang tetap dengan IP [prefix IP].3.69
