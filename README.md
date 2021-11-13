@@ -295,7 +295,52 @@ Dan setelah melakukan login akan membuka halaman super.franky.d09.com
 ## No 12
 Karena Luffy orangnya sangat teliti untuk mencari harta karun, ketika ia berhasil mendapatkan gambar, ia mendapatkan gambar dan melihatnya dengan kecepatan 10 kbps
 
+
+Dimana untuk mengatur bandwitch dimana agar kecepatan 10 kbps diperoleh konversi ke 1250 byte 
+Pada `Water7` dilakukan membuat dan melakukan konfigurasi pada `/etc/squid/acl-bandwidth.conf` dengan menambahkan
+```
+acl download url_regex -i .jpg$ .png$
+auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
+
+acl luffy proxy_auth luffybelikapald09
+acl zoro proxy_auth zorobelikapald09
+
+delay_pools 
+
+delay_class 1 1
+delay_parameters 1 1250/1250
+delay_access 1 allow luffy
+delay_access 1 deny zoro
+delay_access 1 allow download
+delay_access 1 deny all
+```
+
+Kemudian memasukkan file `/etc/squid/acl-bandwidth.conf ` tersebut ke dalam `/etc/squid/squid.conf`
+```
+echo '
+include /etc/squid/acl/bandwidth.conf
+' >> /etc/squid/squid.conf
+```
+
+### Testing
+![Screenshot (849)](https://user-images.githubusercontent.com/65032157/141643593-e1d4a540-929b-4dd9-abbd-9115d1b28e88.png)
+
+
 ## No 13
 Sedangkan, Zoro yang sangat bersemangat untuk mencari harta karun, sehingga kecepatan kapal Zoro tidak dibatasi ketika sudah mendapatkan harta yang diinginkannya
+
+Seperti pada `Soal 12` , melakukan penambahan pada file `/etc/squid/acl-bandwidth.conf ` dengan konfigurasi
+```
+delay_class 2 1
+delay_parameters 2 none
+delay_access 2 allow zoro
+delay_access 2 deny luffy
+delay_access 2 deny all 
+```
+Dimana akan didapatkan akses Zoro tidak mendapat limit bandwitch sehingga ketika melakukan donwload akan langsung berhasil 
+### Testing
+![Screenshot (848)](https://user-images.githubusercontent.com/65032157/141643641-380c1619-9f5a-40f3-9fd0-9716a374ac34.png)
+
+
 
 ## Error dan Kendala
