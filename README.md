@@ -199,7 +199,8 @@ Kemudian lakukan `service bind9 restart`.
 
 Pada `Jipangu` edit file `/etc/dhcp/dhcpd.conf` dengan menambahkan IP EniesLobby pada `option domain-name-servers` pada `subnet 192.196.1.0` dan `subnet 192.196.3.0`. Untuk testing lakukan `ping google.com` pada Client.
 
-<img src="img/M03-5.png">
+<img src="img/M03-5-1.png">
+<img src="img/M03-6.png">
 
 
 ## No 6
