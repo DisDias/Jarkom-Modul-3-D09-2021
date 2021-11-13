@@ -240,13 +240,89 @@ Kemudian restart pada client dan lakukan perintah `ip a`.
 
 
 ## No 8
-Pada Loguetown, proxy harus bisa diakses dengan nama jualbelikapal.yyy.com dengan port yang digunakan adalah 5000
+Pada Loguetown, proxy harus bisa diakses dengan nama jualbelikapal.yyy.com dengan port yang digunakan adalah 5000  
+
+Untuk menyelesaikan soal nomor 8, yang pertama kita lakukan adalah membuat domain jualbelikapald09.com dengan port 5000 di EniesLobby.  
+
+Konfigurasi ini pernah dilakukan di modul sebelumnya. Pertama kita mengedit konfigurasi dengan perintah `nano /etc/bind/named.conf.local`. Lalu kita menambahkan script berikut:   
+
+```
+`zone "jualbelikapal.d09.com" {
+		type master;
+		file "/etc/bind/jarkom/jualbelikapal.d09.com";
+	};
+```   
+
+Buat folder jarkom di dalam /etc/bind dengan perintah `mkdir /etc/bind/jarkom`.   
+
+Copy file db.local ke dalam folder yang baru dibuat `cp /etc/bind/db.local /etc/bind/jarkom/jualbelikapal.d09.com`.  
+
+Lakukan konfigurasi terhadap file db.local yang sudah dicopy. Masukkan konfigurasi berikut.  
+
+```  
+`$TTL    604800
+@       IN      SOA     jualbelikapal.d09.com. root.jualbelikapal.d09.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      jualbelikapal.d09.com.
+@       IN      A       192.196.2.3 ; IP Water7
+@       IN      AAAA    ::1
+```  
+
+Restart service dengan perintah `sevice bind9 restart`.  
+
+Selanjutnya kita akan mengonfigurasi Water7 (Proxy Server).  
+
+Lakukan konfigurasi dnegan perintah `nano /etc/squid/squid.conf`.  
+
+Tambahkan `http_access allow all` pada konfigurasi.  
+
+Restart service dengan perintah `service squid restart`.  
+
+Aktifkan proxy di Client dengan perintah `export http_proxy="http://jualbelikapal.d09.com:5000"`.  
+
+Testing dengan perintah `lynx https://its.ac.id`.  
 
 ## No 9
-Agar transaksi jual beli lebih aman dan pengguna website ada dua orang, proxy dipasang autentikasi user proxy dengan enkripsi MD5  dengan dua username, yaitu luffybelikapalyyy dengan password luffy_yyy dan zorobelikapalyyy dengan password zoro_yyy
+Agar transaksi jual beli lebih aman dan pengguna website ada dua orang, proxy dipasang autentikasi user proxy dengan enkripsi MD5  dengan dua username, yaitu luffybelikapalyyy dengan password luffy_yyy dan zorobelikapalyyy dengan password zoro_yyy  
+
+Pada soal nomor 9, kita diminta untuk membuat 2 user dengan nama luffybelikapald09 dan zorobelikapald09 dengan password yang sudah ditentukan menggunakan autentikasi user proxy enkripsi MD51. Untuk melakukannya kita membutuhkan perintah berikut:  
+```  
+htpasswd -cm /etc/squid/passwd luffybelikapald09
+htpasswd -m /etc/squid/passwd zorobelikapald09  
+```  
+![9-1](https://user-images.githubusercontent.com/68385532/141646506-a84eac8f-f142-4c94-b4f3-2dc78a7aab0d.PNG)  
+
+Edit konfigurasi squid dengan perintah `nano /etc/squid/squid.conf`.  
+
+Tambahkan script seperti di bawah.  
+![9-2](https://user-images.githubusercontent.com/68385532/141646507-b1c77181-0246-4602-9f3d-8eb3f899696d.PNG)  
+
+Restart squid dengan perintah `service squid restart`.  
+![9-3](https://user-images.githubusercontent.com/68385532/141646508-e5be09ba-110a-4d24-b9cb-cb1a0a45c93e.PNG)  
+
+Lakukan testing dengan perintah `lynx google.com`
+![9](https://user-images.githubusercontent.com/68385532/141646505-6108f646-2961-4553-b743-fb6c6d23b3ac.PNG)
 
 ## No 10
-Transaksi jual beli tidak dilakukan setiap hari, oleh karena itu akses internet dibatasi hanya dapat diakses setiap hari Senin-Kamis pukul 07.00-11.00 dan setiap hari Selasa-Jum’at pukul 17.00-03.00 keesokan harinya (sampai Sabtu pukul 03.00)
+Transaksi jual beli tidak dilakukan setiap hari, oleh karena itu akses internet dibatasi hanya dapat diakses setiap hari Senin-Kamis pukul 07.00-11.00 dan setiap hari Selasa-Jum’at pukul 17.00-03.00 keesokan harinya (sampai Sabtu pukul 03.00)  
+
+Buat file baru di Water7 dengan perintah berikut `nano /etc/squid/acl.conf`.  
+
+Isikan sesuai gambar di bawah.  
+![10-1](https://user-images.githubusercontent.com/68385532/141646509-1ee801e6-a9a7-495a-8858-be0ef7c5ba12.PNG)  
+
+Edit konfigurasi squid dengan perintah `nano /etc/squid/squid.conf`. Samakan konfigurasi dengan gambar.  
+![10-2](https://user-images.githubusercontent.com/68385532/141646502-371b22fe-1bdb-469e-8802-03dee2235b0e.PNG)  
+
+Restart squid dengan perintah `service squid restart`.  
+
+Lakukan testing.  
+
 
 ## No 11
 Web server super.franky.yyy.com berada pada node Skypie
